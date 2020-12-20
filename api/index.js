@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const meals = require('./routes/meals')
+const auth = require('./routes/auth')
 const orders = require('./routes/orders')
 const app = express()
 
@@ -14,4 +15,6 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true , useUnifiedTopo
 
 app.use('/api/meals', meals)
 app.use('/api/orders', orders)
+app.use('/api/auth', auth)
+
 module.exports = app
