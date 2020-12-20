@@ -13,7 +13,7 @@ const signToken = (_id) => {
 }
 
 router.post('/register', (req, res) => {
-    const {email, password} = req.body
+    const { email, password } = req.body
     crypto.randomBytes(16, (err, salt) => {
 	const newSalt = salt.toString('base64')
 	crypto.pbkdf2(password, newSalt, 10000, 64, 'sha1', (err, key) => {
@@ -23,11 +23,11 @@ router.post('/register', (req, res) => {
 		    if(user){
 			return res.send('Usuario ya existe')
 		    }
-		    Users.create([
+		    Users.create({
 			email, 
-			password = encryptedPassword,
-			salt =  newSalt,
-		    ]).then(() => {
+			password: encryptedPassword,
+			salt:  newSalt,
+		    }).then(() => {
 			res.send('Usuario creado con exito')
 		    })
 		})
